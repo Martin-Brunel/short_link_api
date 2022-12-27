@@ -22,6 +22,7 @@ pub fn get_by_email(email_value: String) -> Result<User, Status> {
     let mut c = establish_connection();
     match user
         .filter(email.eq(email_value))
+        .filter(is_deleted.eq(0))
         .first::<User>(&mut c) {
             Ok(results) => Ok(results),
             Err(_)=> Err(Status::NotFound)

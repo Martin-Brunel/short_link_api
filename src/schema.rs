@@ -26,6 +26,10 @@ diesel::table! {
         email -> Varchar,
         password -> Varchar,
         roles -> Varchar,
+        created_at -> Datetime,
+        is_deleted -> Tinyint,
+        deleted_at -> Nullable<Datetime>,
+        updated_at -> Nullable<Datetime>,
     }
 }
 
