@@ -37,6 +37,9 @@ fn rocket() -> _ {
         .mount("/user", routes![
                 controllers::user::post_user
             ])
+        .mount("/link", routes![
+            controllers::link::post_link
+        ])
         .mount("/auth", routes![
             controllers::auth::login
         ])

@@ -1532,6 +1532,7 @@ dependencies = [
  "diesel",
  "dotenvy",
  "jsonwebtoken",
+ "rand",
  "rocket",
  "serde",
  "serde_json",
