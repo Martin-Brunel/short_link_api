@@ -1,3 +1,3 @@
 -- Your SQL goes here
-ALTER TABLE `short_links`.`link` 
+ALTER TABLE `xslink`.`link` 
 ADD COLUMN `user_id` VARCHAR(45) NOT NULL AFTER `id`;

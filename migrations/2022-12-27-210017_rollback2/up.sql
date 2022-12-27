@@ -1,3 +1,3 @@
 -- Your SQL goes here
-ALTER TABLE `short_links`.`link` 
+ALTER TABLE `xslink`.`link` 
 DROP COLUMN `user_id`;
