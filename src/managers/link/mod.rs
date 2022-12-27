@@ -27,3 +27,12 @@ pub fn create(link_input: LinkInput, user_id: i32) -> Result<LinkOutput, Status>
     }
     
 } 
+
+pub fn get_link_by_code(code: String) -> Result<LinkOutput, Status> {
+    match repositories::link::get_link_by_code(code) {
+        Ok(link) => Ok(LinkOutput {
+            url: link.url
+        }),
+        Err(status) => Err(status)
+    }
+}

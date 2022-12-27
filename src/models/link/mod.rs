@@ -1,14 +1,18 @@
-use diesel::{prelude::*};
+use chrono::NaiveDateTime;
+use diesel::{self};
+use diesel::prelude::*;
 use serde::{Serialize, Deserialize};
 
 #[derive(Deserialize, Serialize, Queryable)]
+#[diesel(table_name = link)]
+#[diesel(belongs_to(User))]
 pub struct Link {
-    id: i32,
-    user_id: i32,
-    url: String,
-    code: String,
-    is_deleted: bool,
-    created_at: String,
-    deleted_at: String,
-    updated_at: String,
+    pub id: i32,
+    pub url: String,
+    pub code: String,
+    pub user_id: i32,
+    pub created_at: NaiveDateTime,
+    pub is_deleted: i8,
+    pub deleted_at: Option<NaiveDateTime>,
+    pub updated_at: Option<NaiveDateTime>,
 }

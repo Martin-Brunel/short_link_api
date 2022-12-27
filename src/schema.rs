@@ -3,11 +3,11 @@
 diesel::table! {
     link (id) {
         id -> Integer,
-        user_id -> Integer,
         url -> Varchar,
         code -> Varchar,
-        is_deleted -> Tinyint,
+        user_id -> Integer,
         created_at -> Datetime,
+        is_deleted -> Tinyint,
         deleted_at -> Nullable<Datetime>,
         updated_at -> Nullable<Datetime>,
     }

@@ -31,6 +31,7 @@ fn rocket() -> _ {
             "/",
             SwaggerUi::new("/doc/<_..>").url("/api-doc/openapi.json", ApiDoc::openapi()),
         )
+        .mount("/", routes![controllers::link::redirect_url])
         .mount("/liste", routes![
                 controllers::liste::get_all
             ])

@@ -1,5 +1,3 @@
-use diesel::query_dsl::select_dsl::SelectDsl;
-
 use crate::db_connect::{establish_connection};
 use crate::schema;
 use crate::models::liste::Liste;

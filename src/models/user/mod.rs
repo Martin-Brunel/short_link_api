@@ -5,7 +5,7 @@ use utoipa::ToSchema;
 use crate::schema::user;
 
 
-#[derive(Queryable, Deserialize, Serialize, Insertable,ToSchema)]
+#[derive(Queryable, Deserialize, Serialize, Insertable, ToSchema)]
 #[table_name = "user"]
 pub struct User {
     pub id: i32,
