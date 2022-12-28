@@ -6,6 +6,7 @@ use serde::{Serialize, Deserialize};
 #[derive(Deserialize, Serialize, Queryable)]
 #[diesel(table_name = link)]
 #[diesel(belongs_to(User))]
+#[diesel(belongs_to(Brand))]
 pub struct Link {
     pub id: i32,
     pub url: String,
@@ -15,4 +16,5 @@ pub struct Link {
     pub is_deleted: i8,
     pub deleted_at: Option<NaiveDateTime>,
     pub updated_at: Option<NaiveDateTime>,
+    pub brand_id: i32
 }

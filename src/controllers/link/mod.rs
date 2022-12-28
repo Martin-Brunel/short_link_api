@@ -8,11 +8,11 @@ use crate::managers;
 
 #[post("/",  format = "json", data="<link_input>")]
 pub fn post_link(authorized: Security, link_input: Json<LinkInput>) -> Result<Json<LinkOutput>, Status> {
-    let user_id = authorized.user.id.clone();
+    let user = authorized.user;
     let link_input = LinkInput {
         url: link_input.url.clone()
     };
-    match managers::link::create(link_input, user_id) {
+    match managers::link::create(link_input, user) {
         Ok(new_link) => Ok(Json(new_link)),
         Err(_) => Err(Status { code: 400 })
     }

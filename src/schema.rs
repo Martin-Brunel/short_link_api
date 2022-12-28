@@ -1,6 +1,17 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
+    brand (id) {
+        id -> Integer,
+        name -> Varchar,
+        created_at -> Datetime,
+        is_deleted -> Tinyint,
+        deleted_at -> Nullable<Datetime>,
+        updated_at -> Nullable<Datetime>,
+    }
+}
+
+diesel::table! {
     link (id) {
         id -> Integer,
         url -> Varchar,
@@ -10,6 +21,7 @@ diesel::table! {
         is_deleted -> Tinyint,
         deleted_at -> Nullable<Datetime>,
         updated_at -> Nullable<Datetime>,
+        brand_id -> Integer,
     }
 }
 
@@ -30,10 +42,15 @@ diesel::table! {
         is_deleted -> Tinyint,
         deleted_at -> Nullable<Datetime>,
         updated_at -> Nullable<Datetime>,
+        brand_id -> Integer,
     }
 }
 
+diesel::joinable!(link -> brand (brand_id));
+diesel::joinable!(user -> brand (brand_id));
+
 diesel::allow_tables_to_appear_in_same_query!(
+    brand,
     link,
     liste,
     user,

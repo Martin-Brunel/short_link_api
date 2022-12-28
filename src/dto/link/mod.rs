@@ -14,6 +14,7 @@ pub struct LinkInsert {
     pub code: String,
     pub url: String,
     pub user_id: i32,
+    pub brand_id: i32,
 }
 
 #[derive(Deserialize, Serialize)]

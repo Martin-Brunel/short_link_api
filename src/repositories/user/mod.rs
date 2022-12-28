@@ -1,13 +1,13 @@
 use rocket::http::Status;
 
 use crate::db_connect::{establish_connection};
-use crate::dto::user::UserInput;
+use crate::dto::user::{UserInput, UserInsert};
 use crate::schema;
 use crate::models::user::User;
 use diesel::{RunQueryDsl, QueryDsl};
 use diesel::ExpressionMethods;
 
-pub fn create(new_user: UserInput) -> usize {
+pub fn create(new_user: UserInsert) -> usize {
     use self::schema::user::dsl::*; 
     let mut c = establish_connection();
     let inserted = diesel::insert_into(user)

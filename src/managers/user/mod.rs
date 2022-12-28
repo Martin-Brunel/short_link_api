@@ -1,12 +1,12 @@
 use crate::dto::credentials::{Credentials};
-use crate::dto::user::UserInput;
+use crate::dto::user::{UserInput, UserInsert};
 use crate::models::user::User;
 use crate::repositories::{user, self};
 use bcrypt::{verify};
 use rocket::http::Status;
 
 
-pub fn create(input_user: UserInput) -> Result<User, Status> {
+pub fn create(input_user: UserInsert) -> Result<User, Status> {
     let email = input_user.email.clone();
     user::create(input_user);
     match user::get_by_email(email) {

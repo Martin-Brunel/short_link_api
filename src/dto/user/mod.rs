@@ -3,10 +3,18 @@ use diesel;
 use serde::{Serialize, Deserialize};
 use crate::schema::user;
 
-#[derive(Deserialize, Serialize, Insertable, Queryable)]
-#[table_name = "user"]
+#[derive(Deserialize, Serialize)]
 pub struct UserInput {
     pub email: String,
     pub password: String,
-    pub roles: String
+    pub brand_id: i32,
+}
+
+#[derive(Deserialize, Serialize, Insertable, Queryable)]
+#[table_name = "user"]
+pub struct UserInsert {
+    pub email: String,
+    pub password: String,
+    pub roles: String,
+    pub brand_id: i32,
 }
