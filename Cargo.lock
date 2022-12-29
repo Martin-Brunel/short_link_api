@@ -1349,6 +1349,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "rocket-client-addr"
+version = "0.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8cb54a6e3dd696465c8a47fa61603b49e28cf475133a3d082902c2d4eaae9df1"
+dependencies = [
+ "rocket",
+]
+
+[[package]]
 name = "rocket_codegen"
 version = "0.5.0-rc.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1536,6 +1545,7 @@ dependencies = [
  "jsonwebtoken",
  "rand",
  "rocket",
+ "rocket-client-addr",
  "serde",
  "serde_json",
  "utoipa",
