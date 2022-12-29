@@ -1,5 +1,5 @@
 git pull;
 sudo systemctl stop rocket.service;
-diesel migration run;
+/home/ubuntu/.cargo/bin/diesel migration run;
 cargo run --release;
 sudo systemctl start rocket.service;
