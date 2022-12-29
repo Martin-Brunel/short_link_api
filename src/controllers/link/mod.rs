@@ -3,6 +3,7 @@ use rocket::response::Redirect;
 use rocket::serde::{ json::Json};
 use crate::dto::link::{LinkInput, LinkOutput};
 use crate::guards::security::Security;
+use crate::guards::socket_adress::{ RequestSocketAddr};
 use crate::managers;
 
 
@@ -19,10 +20,12 @@ pub fn post_link(authorized: Security, link_input: Json<LinkInput>) -> Result<Js
 }
 
 #[get("/<code>")]
-pub fn redirect_url(code: String) -> Result<Redirect, Status> {
-    println!("{}", code);
+pub fn redirect_url(socket_adress: RequestSocketAddr ,code: String) -> Result<Redirect, Status> {
+    
     match managers::link::get_link_by_code(code) {
         Ok(link_output) => {
+            let ip = socket_adress.socket_addr;
+            managers::link_view::insert(ip, link_output.id).unwrap();
             let url = link_output.url;
             Ok(Redirect::to(url))
         },

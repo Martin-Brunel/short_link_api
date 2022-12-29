@@ -1,6 +1,5 @@
-use chrono::Utc;
 use jsonwebtoken::{Algorithm, decode, Validation, DecodingKey};
-use rocket::{Request, request::{self, Outcome}, http::Status};
+use rocket::{Request, request::{ Outcome}, http::Status};
 use dotenvy::dotenv;
 use serde::Serialize;
 use std::env;

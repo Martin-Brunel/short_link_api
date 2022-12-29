@@ -1,5 +1,5 @@
 use crate::dto::credentials::{Credentials};
-use crate::dto::user::{UserInput, UserInsert};
+use crate::dto::user::{UserInsert};
 use crate::models::user::User;
 use crate::repositories::{user, self};
 use bcrypt::{verify};

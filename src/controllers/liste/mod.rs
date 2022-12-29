@@ -1,5 +1,4 @@
 use rocket::{serde::{ json::Json}, http::Status,};
-use serde::Deserialize;
 use crate::{ models::{liste::Liste}, managers};
 use crate::guards::security::Security;
 

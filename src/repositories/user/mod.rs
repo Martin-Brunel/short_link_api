@@ -1,7 +1,7 @@
 use rocket::http::Status;
 
 use crate::db_connect::{establish_connection};
-use crate::dto::user::{UserInput, UserInsert};
+use crate::dto::user::{ UserInsert};
 use crate::schema;
 use crate::models::user::User;
 use diesel::{RunQueryDsl, QueryDsl};

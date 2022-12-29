@@ -1,4 +1,4 @@
-use crate::{dto::link::{LinkInput, LinkOutput, LinkInsert}, repositories, utils::code::generate_code, models::user::User,};
+use crate::{dto::link::{LinkInput, LinkOutput, LinkInsert}, repositories, utils::code::generate_code, models::{user::User, link::Link},};
 use rocket::http::Status;
 use dotenvy::dotenv;
 use std::env;
@@ -29,11 +29,9 @@ pub fn create(link_input: LinkInput, user: User) -> Result<LinkOutput, Status> {
     
 } 
 
-pub fn get_link_by_code(code: String) -> Result<LinkOutput, Status> {
+pub fn get_link_by_code(code: String) -> Result<Link, Status> {
     match repositories::link::get_link_by_code(code) {
-        Ok(link) => Ok(LinkOutput {
-            url: link.url
-        }),
+        Ok(link) => Ok(link),
         Err(status) => Err(status)
     }
 }
