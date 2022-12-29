@@ -36,3 +36,22 @@ pub fn get_link_by_code(code: String) -> Result<Link, Status> {
         Err(status) => Err(status)
     }
 }
+
+pub fn get_user_links(user: User) -> Result<Vec<Link>, Status> {
+    match repositories::link::get_user_links(user.id) {
+        Ok(links) => Ok(links),
+        Err(status) => Err(status)
+    }
+}
+
+pub fn add_click(link: Link) -> Result<bool, Status> {
+    match repositories::link::add_click(link) {
+        Ok(updated) => {
+            match updated {
+                1 => Ok(true),
+                _ => Err(Status::BadRequest)
+            }
+        },
+        Err(status) => Err(status)
+    }
+}

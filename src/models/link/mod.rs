@@ -3,7 +3,7 @@ use diesel::{self};
 use diesel::prelude::*;
 use serde::{Serialize, Deserialize};
 
-#[derive(Deserialize, Serialize, Queryable)]
+#[derive(Deserialize, Serialize, Queryable, Clone)]
 #[diesel(table_name = link)]
 #[diesel(belongs_to(User))]
 #[diesel(belongs_to(Brand))]
@@ -18,4 +18,5 @@ pub struct Link {
     pub updated_at: Option<NaiveDateTime>,
     pub brand_id: i32,
     pub label: String,
+    pub nb_clicks: i32,
 }

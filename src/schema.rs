@@ -23,6 +23,7 @@ diesel::table! {
         updated_at -> Nullable<Datetime>,
         brand_id -> Integer,
         label -> Varchar,
+        nb_clicks -> Integer,
     }
 }
 

@@ -5,6 +5,7 @@ use rocket_client_addr::ClientRealAddr;
 use crate::dto::link::{LinkInput, LinkOutput};
 use crate::guards::security::Security;
 use crate::managers;
+use crate::models::link::Link;
 
 
 #[post("/",  format = "json", data="<link_input>")]
@@ -25,11 +26,22 @@ pub fn redirect_url(socket_adress: ClientRealAddr ,code: String) -> Result<Redir
     
     match managers::link::get_link_by_code(code) {
         Ok(link_output) => {
+            let current_link = link_output.clone();
             let ip = socket_adress.get_ipv4_string().unwrap(); 
             managers::link_view::insert(ip, link_output.id).unwrap();
+            managers::link::add_click(current_link).unwrap();
             let url = link_output.url;
             Ok(Redirect::to(url))
         },
+        Err(status) => Err(status)
+    }
+}
+
+#[get("/")]
+pub fn get_links(authorized: Security) -> Result<Json<Vec<Link>>, Status> {
+    let user = authorized.user;
+    match managers::link::get_user_links(user) {
+        Ok(links) => Ok(Json(links)),
         Err(status) => Err(status)
     }
 }
