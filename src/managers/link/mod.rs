@@ -1,4 +1,4 @@
-use crate::{dto::link::{LinkInput, LinkOutput, LinkInsert}, repositories, utils::code::generate_code, models::{user::User, link::Link},};
+use crate::{dto::link::{LinkInput, LinkOutput, LinkInsert}, repositories, utils::code::generate_code, models::{user::User, link::Link}, controllers::link,};
 use rocket::http::Status;
 use dotenvy::dotenv;
 use std::env;
@@ -11,6 +11,7 @@ pub fn create(link_input: LinkInput, user: User) -> Result<LinkOutput, Status> {
         url: link_input.url.clone(),
         user_id: user.id.clone(),
         brand_id: user.brand_id.clone(),
+        label: link_input.label.clone()
     };
     let code = link_insert.code.clone();
 

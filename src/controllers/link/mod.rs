@@ -4,7 +4,6 @@ use rocket::serde::{ json::Json};
 use rocket_client_addr::ClientRealAddr;
 use crate::dto::link::{LinkInput, LinkOutput};
 use crate::guards::security::Security;
-use crate::guards::socket_adress::{ RequestSocketAddr};
 use crate::managers;
 
 
@@ -12,7 +11,8 @@ use crate::managers;
 pub fn post_link(authorized: Security, link_input: Json<LinkInput>) -> Result<Json<LinkOutput>, Status> {
     let user = authorized.user;
     let link_input = LinkInput {
-        url: link_input.url.clone()
+        url: link_input.url.clone(),
+        label: link_input.label.clone()
     };
     match managers::link::create(link_input, user) {
         Ok(new_link) => Ok(Json(new_link)),

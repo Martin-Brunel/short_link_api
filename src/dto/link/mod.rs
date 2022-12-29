@@ -6,6 +6,7 @@ use crate::schema::link;
 #[derive(Deserialize, Serialize, Debug)]
 pub struct LinkInput {
     pub url: String,
+    pub label: String,
 }
 
 #[derive(Deserialize, Serialize, Insertable, Queryable)]
@@ -15,6 +16,7 @@ pub struct LinkInsert {
     pub url: String,
     pub user_id: i32,
     pub brand_id: i32,
+    pub label: String,
 }
 
 #[derive(Deserialize, Serialize)]

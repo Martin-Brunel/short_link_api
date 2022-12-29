@@ -16,5 +16,6 @@ pub struct Link {
     pub is_deleted: i8,
     pub deleted_at: Option<NaiveDateTime>,
     pub updated_at: Option<NaiveDateTime>,
-    pub brand_id: i32
+    pub brand_id: i32,
+    pub label: String,
 }
