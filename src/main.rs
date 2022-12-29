@@ -9,6 +9,7 @@ pub mod utils;
 pub mod guards;
 pub mod errors;
 
+use rocket_dyn_templates::Template;
 use utoipa_swagger_ui::SwaggerUi;
 use utoipa::{ OpenApi };
 
@@ -26,7 +27,7 @@ struct ApiDoc;
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .register("/", catchers![errors::unauthorized, errors::forbidden])
+        .register("/", catchers![errors::unauthorized, errors::forbidden, errors::notfound])
         .mount(
             "/",
             SwaggerUi::new("/doc/<_..>").url("/api-doc/openapi.json", ApiDoc::openapi()),
@@ -44,5 +45,6 @@ fn rocket() -> _ {
         .mount("/auth", routes![
             controllers::auth::login
         ])
+        .attach(Template::fairing())
 }
 

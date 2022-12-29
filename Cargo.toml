@@ -18,3 +18,4 @@ utoipa = {version = "2", features = ["rocket_extras"] }
 utoipa-swagger-ui = {version = "3",  features = ["rocket"]}
 rand = "0.8.5"
 rocket-client-addr = "0.5.2"
+rocket_dyn_templates = {version = "0.1.0-rc.1", features = ["tera"]}
