@@ -7,7 +7,7 @@ use crate::schema::user;
 
 
 #[derive(Queryable, Deserialize, Serialize, Insertable, ToSchema)]
-#[table_name = "user"]
+#[diesel(table_name = user)]
 #[diesel(belongs_to(Brand))]
 pub struct User {
     pub id: i32,

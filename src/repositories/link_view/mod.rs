@@ -1,6 +1,6 @@
 use crate::{dto::link_view::LinkViewInsert, db_connect::establish_connection};
 use crate::schema;
-use diesel::{RunQueryDsl, QueryDsl};
+use diesel::{RunQueryDsl};
 
 pub fn create(new_link_view: LinkViewInsert) -> usize {
     use self::schema::link_view::dsl::*; 

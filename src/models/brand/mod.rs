@@ -7,7 +7,7 @@ use crate::schema::brand;
 
 
 #[derive(Queryable, Deserialize, Serialize, Insertable, ToSchema)]
-#[table_name = "brand"]
+#[diesel(table_name = brand)]
 pub struct Brand {
     pub id: i32,
     pub name: String,

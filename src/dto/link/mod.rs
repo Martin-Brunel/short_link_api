@@ -10,7 +10,7 @@ pub struct LinkInput {
 }
 
 #[derive(Deserialize, Serialize, Insertable, Queryable)]
-#[table_name = "link"]
+#[diesel(table_name = link)]
 pub struct LinkInsert {
     pub code: String,
     pub url: String,

@@ -1,4 +1,4 @@
-use crate::{dto::link::{LinkInput, LinkOutput, LinkInsert}, repositories, utils::code::generate_code, models::{user::User, link::Link}, controllers::link,};
+use crate::{dto::link::{LinkInput, LinkOutput, LinkInsert}, repositories, utils::code::generate_code, models::{user::User, link::Link}};
 use rocket::http::Status;
 use dotenvy::dotenv;
 use std::env;

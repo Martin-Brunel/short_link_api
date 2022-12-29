@@ -11,7 +11,7 @@ pub struct UserInput {
 }
 
 #[derive(Deserialize, Serialize, Insertable, Queryable)]
-#[table_name = "user"]
+#[diesel(table_name = user)]
 pub struct UserInsert {
     pub email: String,
     pub password: String,
