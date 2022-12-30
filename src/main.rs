@@ -9,9 +9,12 @@ pub mod utils;
 pub mod guards;
 pub mod errors;
 
+use rocket::{fairing::{Fairing, Info, Kind}, http::Header, Request, Response};
 use rocket_dyn_templates::Template;
 use utoipa_swagger_ui::SwaggerUi;
 use utoipa::{ OpenApi };
+extern crate rocket_cors;
+pub struct CORS;
 
 #[macro_use] extern crate rocket;
 
@@ -23,9 +26,29 @@ use utoipa::{ OpenApi };
 )]
 struct ApiDoc;
 
+#[rocket::async_trait]
+impl Fairing for CORS {
+    fn info(&self) -> Info {
+        Info {
+            name: "Add CORS headers to responses",
+            kind: Kind::Response
+        }
+    }
+
+    async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
+        response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
+        response.set_header(Header::new("Access-Control-Allow-Methods", "POST, GET, PATCH, OPTIONS"));
+        response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
+        response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
+    }
+}
+
+
+
 
 #[launch]
 fn rocket() -> _ {
+
     rocket::build()
         .register("/", catchers![errors::unauthorized, errors::forbidden, errors::notfound])
         .mount(
@@ -47,5 +70,6 @@ fn rocket() -> _ {
             controllers::auth::login
         ])
         .attach(Template::fairing())
+        .attach(CORS)
 }
 
