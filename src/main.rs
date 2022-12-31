@@ -9,12 +9,17 @@ pub mod utils;
 pub mod guards;
 pub mod errors;
 
-use rocket::{fairing::{Fairing, Info, Kind}, http::Header, Request, Response};
+use rocket::fairing::{Fairing, Info, Kind};
+use rocket::http::{Header};
+
+
+use rocket::{routes, Request, Response};
+
 use rocket_dyn_templates::Template;
 use utoipa_swagger_ui::SwaggerUi;
 use utoipa::{ OpenApi };
 extern crate rocket_cors;
-pub struct CORS;
+
 
 #[macro_use] extern crate rocket;
 
@@ -25,6 +30,9 @@ pub struct CORS;
     ),
 )]
 struct ApiDoc;
+
+pub struct CORS;
+
 
 #[rocket::async_trait]
 impl Fairing for CORS {
@@ -37,24 +45,28 @@ impl Fairing for CORS {
 
     async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
         response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
-        response.set_header(Header::new("Access-Control-Allow-Methods", "POST, GET, PATCH, OPTIONS"));
+        response.set_header(Header::new("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, PATCH, OPTIONS"));
         response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
         response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
     }
 }
 
-
+#[options("/<_..>")]
+fn all_options() {
+    /* Intentionally left empty */
+}
 
 
 #[launch]
 fn rocket() -> _ {
-
+      
     rocket::build()
         .register("/", catchers![errors::unauthorized, errors::forbidden, errors::notfound])
         .mount(
             "/",
             SwaggerUi::new("/doc/<_..>").url("/api-doc/openapi.json", ApiDoc::openapi()),
         )
+        .mount("/", routes![all_options])
         .mount("/", routes![controllers::link::redirect_url])
         .mount("/liste", routes![
                 controllers::liste::get_all
@@ -71,5 +83,6 @@ fn rocket() -> _ {
         ])
         .attach(Template::fairing())
         .attach(CORS)
+
 }
 
