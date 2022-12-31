@@ -57,6 +57,8 @@ diesel::table! {
         deleted_at -> Nullable<Datetime>,
         updated_at -> Nullable<Datetime>,
         brand_id -> Integer,
+        firstname -> Varchar,
+        lastname -> Varchar,
     }
 }
 

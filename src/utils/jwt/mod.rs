@@ -12,6 +12,8 @@ pub struct JWT {
     pub iat: i64,
     pub exp: i64,
     pub roles: Vec<String>,
+    pub firstname: String,
+    pub lastname: String,
 }
 
 
@@ -28,7 +30,9 @@ pub fn create_jwt(data: User) -> String {
         id: data.id,
         iat: now,
         exp: expiration,
-        roles: serde_json::from_str(&data.roles).unwrap()
+        roles: serde_json::from_str(&data.roles).unwrap(),
+        firstname: data.firstname,
+        lastname: data.lastname 
     };
 
     let jwt_secret = env::var("JWT_SECRET") //on tente de récuperer l'url de la BDD depuis l'environnement

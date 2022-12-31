@@ -19,5 +19,7 @@ pub struct User {
     pub deleted_at: Option<NaiveDateTime>,
     pub updated_at: Option<NaiveDateTime>,
     pub brand_id: i32,
+    pub firstname: String,
+    pub lastname: String,
 
 }

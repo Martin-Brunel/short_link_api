@@ -12,7 +12,9 @@ pub fn post_user(user_input: Json<UserInput>) -> Result<Json<User>, Status> {
         email: user_input.email.clone(),
         password: hash(user_input.password.clone(), DEFAULT_COST).expect("encrypt error"),
         roles: String::from("[\"ROLE_USER\"]"),
-        brand_id: user_input.brand_id.clone()
+        brand_id: user_input.brand_id.clone(),
+        firstname: user_input.firstname.clone(),
+        lastname: user_input.lastname.clone(),
     };
     match managers::user::create(struct_user) {
         Ok(new_user) => Ok(Json(new_user)),

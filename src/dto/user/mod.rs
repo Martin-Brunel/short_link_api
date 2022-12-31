@@ -8,6 +8,8 @@ pub struct UserInput {
     pub email: String,
     pub password: String,
     pub brand_id: i32,
+    pub firstname: String,
+    pub lastname: String,
 }
 
 #[derive(Deserialize, Serialize, Insertable, Queryable)]
@@ -17,4 +19,6 @@ pub struct UserInsert {
     pub password: String,
     pub roles: String,
     pub brand_id: i32,
+    pub firstname: String,
+    pub lastname: String,
 }
