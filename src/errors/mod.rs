@@ -1,7 +1,13 @@
 use rocket::{Request, serde::json::Json};
 use rocket_dyn_templates::{Template, context};
+use serde::{Serialize, Deserialize};
 
-use crate::guards::security::{Security, ErrorObject};
+use crate::guards::{security::{Security}, user_admin::UserAdmin};
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct  ErrorObject {
+    pub message: String,
+}
 
 #[catch(401)]
 pub async fn unauthorized(req: &Request<'_>) -> Json<ErrorObject> {

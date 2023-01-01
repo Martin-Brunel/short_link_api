@@ -4,6 +4,7 @@ use rocket::serde::{ json::Json};
 use rocket_client_addr::ClientRealAddr;
 use crate::dto::link::{LinkInput, LinkOutput};
 use crate::guards::security::Security;
+use crate::guards::user_admin::UserAdmin;
 use crate::managers;
 use crate::models::link::Link;
 
