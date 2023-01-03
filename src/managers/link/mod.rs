@@ -55,3 +55,17 @@ pub fn add_click(link: Link) -> Result<bool, Status> {
         Err(status) => Err(status)
     }
 }
+
+pub fn get_link_by_id(user: User, id: String) -> Result<Link, Status> {
+    let link_id =  id.parse::<i32>().unwrap();
+
+    match repositories::link::get_link_by_id(link_id) {
+        Ok(link) => {
+            match link.user_id == user.id {
+                true => Ok(link),
+                _ => Err(Status::NotFound)
+            }
+        },
+        Err(status) => Err(status)
+    }
+}

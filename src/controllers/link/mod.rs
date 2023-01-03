@@ -22,6 +22,15 @@ pub fn post_link(authorized: Security, link_input: Json<LinkInput>) -> Result<Js
     }
 }
 
+#[get("/id/<id>")]
+pub fn get_link(authorized: Security, id: String) -> Result<Json<Link>, Status> {
+    let user = authorized.user;
+    match managers::link::get_link_by_id(user, id) {
+        Ok(link) => Ok(Json(link)),
+        Err(status) => Err(status)
+    }
+}
+
 #[get("/<code>")]
 pub fn redirect_url(socket_adress: ClientRealAddr ,code: String) -> Result<Redirect, Status> {
     

@@ -57,3 +57,15 @@ pub fn add_click(current_link: Link) -> Result<usize, Status> {
             Err(_) => Err(Status::NotFound)
         } 
 }
+
+pub fn get_link_by_id(link_id: i32) -> Result<Link, Status> {
+    use self::schema::link::dsl::*;
+    let mut c = establish_connection();
+    match link
+        .filter(id.eq(link_id))
+        .filter(is_deleted.eq(0))
+        .first::<Link>(&mut c) {
+            Ok(link_line) => Ok(link_line),
+            Err(_) => Err(Status::NotFound)
+        }     
+}
