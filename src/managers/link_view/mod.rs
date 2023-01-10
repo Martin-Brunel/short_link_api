@@ -14,11 +14,16 @@ pub fn insert(ip: String, link_id: i32) -> Result<bool, Status> {
 }
 
 
-pub fn get_view_by_link(link_id: String) -> Result<Vec<LinkView>, Status> {
+pub fn get_view_by_link(link_id: String, user_id: i32) -> Result<Vec<LinkView>, Status> {
     let link_id =  link_id.parse::<i32>().unwrap();
-
-    match repositories::link_view::find_by_link_id(link_id) {
-        Ok(links) => Ok(links),
+    match repositories::link::get_user_link_by_id(link_id, user_id) {
+        Ok(link) => {
+            match repositories::link_view::find_by_link_id(link.id) {
+                Ok(links) => Ok(links),
+                Err(status) => Err(status)
+            }
+        },
         Err(status) => Err(status)
     }
+
 }
