@@ -78,6 +78,9 @@ fn rocket() -> _ {
             controllers::link::post_link,
             controllers::link::get_links
         ])
+        .mount("/linkviews", routes![
+            controllers::link_view::get_view_by_link
+        ])
         .mount("/auth", routes![
             controllers::auth::login
         ])

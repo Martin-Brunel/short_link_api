@@ -1,6 +1,6 @@
 use rocket::http::Status;
 
-use crate::{repositories, dto::link_view::LinkViewInsert};
+use crate::{repositories, dto::link_view::LinkViewInsert, models::link_view::LinkView};
 
 pub fn insert(ip: String, link_id: i32) -> Result<bool, Status> {
     let new_link_view = LinkViewInsert {
@@ -10,5 +10,15 @@ pub fn insert(ip: String, link_id: i32) -> Result<bool, Status> {
     match repositories::link_view::create(new_link_view) {
         1 => Ok(true),
         _ => Err(Status::BadRequest)
+    }
+}
+
+
+pub fn get_view_by_link(link_id: String) -> Result<Vec<LinkView>, Status> {
+    let link_id =  link_id.parse::<i32>().unwrap();
+
+    match repositories::link_view::find_by_link_id(link_id) {
+        Ok(links) => Ok(links),
+        Err(status) => Err(status)
     }
 }
