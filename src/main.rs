@@ -12,7 +12,6 @@ pub mod errors;
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::http::{Header};
 
-
 use rocket::{routes, Request, Response};
 
 use rocket_dyn_templates::Template;
@@ -59,6 +58,8 @@ fn all_options() {
 
 #[launch]
 fn rocket() -> _ {
+
+   
       
     rocket::build()
         .register("/", catchers![errors::unauthorized, errors::forbidden, errors::notfound])

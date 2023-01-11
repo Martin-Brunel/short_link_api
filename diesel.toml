@@ -7,4 +7,3 @@ file = "src/schema.rs"
 [migrations_directory]
 dir = "migrations"
 
-
